@@ -31,7 +31,13 @@ To enable the display of frame count in the main window of your detection applic
 
    If you use a start file other than `madsen2.py`, you must include the following line in your start file to ensure that the frame count overlay updates properly:
    ```python
-   GLib.timeout_add(100, update_framecount_overlay, app.pipeline, user_data)
+   if __name__ == "__main__":
+    _maybe_init_gst()
+    user_data = user_app_callback_class()
+    app = DET_APP(app_callback, user_data)
+    # Update textoverlay element (if present) every 100 ms
+    GLib.timeout_add(100, update_framecount_overlay, app.pipeline, user_data)
+    app.run()
    ```
    This ensures that the frame count overlay is updated at regular intervals.
 
