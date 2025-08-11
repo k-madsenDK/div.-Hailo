@@ -36,7 +36,7 @@ To enable the display of frame count in the main window of your detection applic
     user_data = user_app_callback_class()
     app = DET_APP(app_callback, user_data)
     # Update textoverlay element (if present) every 100 ms
-    GLib.timeout_add(100, update_framecount_overlay, app.pipeline, user_data)
+    GLib.timeout_add(100, update_framecount_overlay, app.pipeline, user_data) # <-- this has to be added
     app.run()
    ```
    This ensures that the frame count overlay is updated at regular intervals.
